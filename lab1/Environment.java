@@ -1,4 +1,6 @@
-package lab1; 
+package lab1;
+
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 public class Environment {
 	public static final Action MOVE_LEFT = new DynamicAction("LEFT");
@@ -35,10 +37,12 @@ public class Environment {
 	public EnvironmentState executeAction(Action action) {
 		// TODO
 		String agentLocation=envState.getAgentLocation();
-		if(action.equals(MOVE_RIGHT)&&LOCATION_A.equals(agentLocation)){
+		if(action.equals(MOVE_RIGHT)){
 			envState.setAgentLocation(LOCATION_B);
-		}else if(action.equals(MOVE_LEFT)&& LOCATION_B.equals(agentLocation)) {
+		}else if(action.equals(MOVE_LEFT)) {
 			envState.setAgentLocation(LOCATION_A);
+		}else if(action.equals(SUCK_DIRT)) {
+			envState.setLocationState(envState.getAgentLocation(), LocationState.CLEAN);
 		}
 		return envState;
 	}
@@ -46,8 +50,10 @@ public class Environment {
 	// get percept<AgentLocation, LocationState> at the current location where agent
 	// is in.
 	public Percept getPerceptSeenBy() {
-		// TODO
-		return null;
+		String agentLocation=envState.getAgentLocation();
+		LocationState locationState = envState.getLocationState(agentLocation);
+		
+		return new Percept(agentLocation, locationState);
 	}
 
 	public void step() {
