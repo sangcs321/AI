@@ -1,4 +1,4 @@
-package lab1; 
+package lab1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +9,13 @@ public class EnvironmentState {
 	private Map<String, Environment.LocationState> state = new HashMap<String, Environment.LocationState>();
 	private String agentLocation = null;//
 
-	public EnvironmentState(Environment.LocationState locAState, Environment.LocationState locBState) {
+	public EnvironmentState(Environment.LocationState locAState, Environment.LocationState locBState,
+			Environment.LocationState locCState, Environment.LocationState locDState) {
 		this.state.put(Environment.LOCATION_A, locAState);
 		this.state.put(Environment.LOCATION_B, locBState);
+		this.state.put(Environment.LOCATION_C, locCState);
+		this.state.put(Environment.LOCATION_D, locDState);
+
 	}
 
 	public void setAgentLocation(String location) {
